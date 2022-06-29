@@ -1,0 +1,25 @@
+-- criando tabela
+
+CREATE TABLE instrutor(
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    salario DECIMAL(10,2)
+);
+
+-- inserindo dados
+
+insert into instrutor(nome, salario) values ('Vinicius Dias',100);
+
+-- criando a função
+
+CREATE FUNCTION dobro_salario(instrutor) RETURNS decimal as $$
+    SELECT $1.salario * 2 as dobro;
+$$ LANGUAGE SQL;
+
+-- query busca dobro
+
+SELECT nome, 
+dobro_salario(instrutor.*) AS desejo 
+FROM instrutor;
+
+
